@@ -3,8 +3,24 @@
 <form action="/visit" method="post" role="form">
   <div class="form-group">
     <label>Your name</label>
-    <input type="text" class="form-control" placeholder="Enter your name">
+    <input name="username" type="text" class="form-control" placeholder="Enter your name">
   </div>
-  <button type="submit" class="btn btn-primary">Записаться</button>
+
+  <div class="form-group">
+    <label>Your phone</label>
+    <input name="phone" type="text" class="form-control" placeholder="Enter your phone number">
+  </div>
+   <div class="form-group">
+    <label>Когда вас ждать?</label>
+    <input name="datetime" type="text" class="form-control" placeholder="Enter your Date and Time">
+  </div>
+  <div class="form-group">
+    <select class="form-control">
+      <option>Jessie Pinkman</option>
+      <option>Walter White</option>
+      <option>Gus Fring</option>
+    </select> 
+  </div>
+ <button type="submit" class="btn btn-primary">Записаться</button>
 </form>
 
