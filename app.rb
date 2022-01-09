@@ -36,6 +36,15 @@ get '/visit' do
   erb :visit
 end
 
+post '/visit' do 
+  @username = params[:username]
+  @phone = params[:phone]
+  @datetime = params[:datetime]
+  @barber = params[:barber] 
+
+  erb "Ok, username is #{@username}!, #{@phone}, #{@datetime}, #{@barber}"
+end
+
 
 get '/login/form' do
   erb :login_form
