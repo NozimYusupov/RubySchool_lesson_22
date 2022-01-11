@@ -45,9 +45,20 @@ post '/visit' do
 
   if @username == ''
     @error = 'Enter your name'
-    return erb :visit
   end
 
+  if @phone == ''
+    @error = 'Enter your phone'
+  end
+
+  if @datetime == ''
+    @error = 'Enter Date and Time'
+  end
+
+  if @error != ''
+    return erb :visit
+  end
+  
   erb "Ok, username is {@username}!, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
