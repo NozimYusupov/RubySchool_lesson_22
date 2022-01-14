@@ -43,12 +43,12 @@ post '/visit' do
   @barber = params[:barber] 
   @color = params[:color]
 
-  hh = {  :username => 'Enter your name',
+  hh = {
           :phone => 'Enter your phone',
           :datetime => 'Enter Date and Time'
   }
 
-  @error = hh.select {|key, ...| params[key] == ''}.value.join(', ')
+  @error = hh.select {|key, _| params[key] == ''}.values.join(', ')
 
   if @error != ''
     return erb :visit
@@ -57,6 +57,27 @@ post '/visit' do
   erb "Ok, username is {@username}!, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
+post '/contacts' do
+  require 'pony'
+
+  Pony.mail(
+    :name => params[:username],
+    :mail => params[:useremail],
+    :body => params[:textbody],
+    :to => 'nozimy@yandex.ru',
+    :subject => params[:username] + ' has contacted you',
+    :body => params[:textbody],
+    :port => '465',
+    :via => :smtp,
+    :via_options => {
+      :address              => 'smtp.yandex.ru',
+      :port                 => '25',
+      :enable_starttls_auto => true,
+      :user_name            => 'Nozim',
+      :password             => 'Naut1lu$',
+      :authentication       => :plain
+ })
+end
 
 get '/login/form' do
   erb :login_form

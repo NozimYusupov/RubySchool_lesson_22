@@ -1,4 +1,16 @@
-<h2>
-  Contacts
-</h2>
-
+<h2>Contacts</h2>
+<form action="/contacts" method="post" role="form">
+  <div class="form-group">
+     <label>Enter your name</label>
+     <input class="form-control" type="text" name="username" placeholder="Enter your name" value="<%= @username %>">
+  </div>
+  <div class="form-group">
+    <label>Enter your email</label>
+    <input class="form-control" type="email" name="useremail" placeholder="Enter your email" value="<%= @useremail %>"> 
+  </div>
+  <div class="form-group">
+     <label>Enter your text</label>
+  <textarea class="form-control" rows="5" name="textbody" value="<%= @usertext %>"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
