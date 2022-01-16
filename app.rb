@@ -4,7 +4,7 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do
-  @db = SQLite3::Database.new 'barbershop.bd'
+  @db = SQLite3::Database.new 'barbershop.db'
   @db.execute 'CREATE TABLE IF NOT EXISTS
                 "users" (
                           "id"	INTEGER PRIMARY KEY AUTOINCREMENT, 
