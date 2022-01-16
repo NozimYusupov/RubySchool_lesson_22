@@ -81,6 +81,10 @@ post '/visit' do
   erb "Ok, username is #{@username}!, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
+get '/showusers' do
+  erb 'Hello World'
+end
+
 post '/contacts' do
   require 'pony'
 
@@ -104,7 +108,9 @@ post '/contacts' do
 end
 
 def get_db
-  return SQLite3::Database.new 'barbershop.db'
+  db = SQLite3::Database.new 'barbershop.db'
+  db.result_as_hash = true
+  return db
 end
 
 
