@@ -4,8 +4,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do
-  @db = SQLite3::Database.new 'barbershop.db'
-  @db.execute 'CREATE TABLE IF NOT EXISTS
+  db = SQLite3::Database.new 'barbershop.db'
+  db.execute 'CREATE TABLE IF NOT EXISTS
                 "users" (
                           "id"	INTEGER PRIMARY KEY AUTOINCREMENT, 
                           "username"	TEXT,	
@@ -63,7 +63,21 @@ post '/visit' do
   if @error != ''
     return erb :visit
   end
- 
+
+  db = get_db
+  db.execute 'INSERT INTO 
+      users 
+            (
+              username, 
+              phone, 
+              datestamp, 
+              barber, 
+              color
+            )
+      VALUES (?, ?, ?, ?, ?)',
+      [@username, @phone, @datetime, 
+       @barber, @color]
+
   erb "Ok, username is {@username}!, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
@@ -107,3 +121,9 @@ end
 get '/secure/place' do
   erb 'This is a secret place that only <%=session[:identity]%> has access to!'
 end
+
+def get_db
+  return SQLite3::Database.new 'barbershop.db'
+end
+
+
