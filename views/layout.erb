@@ -41,25 +41,17 @@
               <a class="nav-link" href="/visit">Visit<span class="sr-only">(current)</span></a>
 						</li>
              <li class="nav-item">
-              <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(current)</span></a>
-						</li>
-
-            <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<%=username%>
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/login/form">Login</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="/logout">Logout</a>
-							</div>
-						</li>
-					</ul>
+              <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(current)</span></a>             
+             </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/showusers">Record users<span class="sr-only">(current)</span></a>
+              </li>
+				</ul>
 				</div>
 			</nav>
 
 			<div>
-				<%if @error then %>
+        <%if @error && @error.length > 0 then %>
 						<div class="alert alert-danger"><%=@error%></div>
 				<% end %>
 				<%= yield %>

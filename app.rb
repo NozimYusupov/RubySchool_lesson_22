@@ -109,7 +109,7 @@ post '/visit' do
       [@username, @phone, @datetime, 
        @barber, @color]
 
-  erb "Ok, username is #{@username}!, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+  erb "<h2>Ok. Your are recorded</h2>"
 end
 
 get '/showusers' do
