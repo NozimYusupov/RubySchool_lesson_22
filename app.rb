@@ -9,19 +9,38 @@ def get_db
   return db
 end
 
+def is_barber_exists? db, name
+  db.execute('select * from barbers where name=?', [name]).length > 0
+end
 
+def seed_db db, barbers
+  barbers.each do |barber| 
+    if !is_barber_exists? db, barber
+      db.execute 'INSERT INTO barbers (name) values (?)', [barber]
+    end
+  end
+end
 
 configure do
   db = SQLite3::Database.new 'barbershop.db'
-  db.execute 'CREATE TABLE IF NOT EXISTS
-                "users" (
-                          "id"	INTEGER PRIMARY KEY AUTOINCREMENT, 
-                          "username"	TEXT,	
-                          "phone"	TEXT, 
-                          "datestamp"	TEXT, 
-                          "barber"	TEXT, 
-                          "color"	TEXT 
-                        );'
+  db.execute 'CREATE TABLE IF NOT EXISTS "users" 
+                (
+                  "id"	INTEGER PRIMARY KEY AUTOINCREMENT, 
+                  "username"	TEXT,	
+                  "phone"	TEXT, 
+                  "datestamp"	TEXT, 
+                  "barber"	TEXT, 
+                  "color"	TEXT 
+                );'
+
+
+  db.execute 'CREATE TABLE IF NOT EXISTS "barbers" 
+                (
+                  "id"	INTEGER PRIMARY KEY AUTOINCREMENT, 
+                  "name"	TEXT	
+                 );'
+
+  seed_db db, ['Jessie Pinkman', 'Walter White', 'Gus Fring', 'Mike Ehrmantraut']
 end
 
 helpers do
@@ -73,8 +92,7 @@ post '/visit' do
   end
 
   db = get_db
-  db.execute 'INSERT INTO 
-      users 
+  db.execute 'INSERT INTO users 
             (
               username, 
               phone, 
